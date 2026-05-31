@@ -1,0 +1,43 @@
+.lang-switch {
+  position: fixed;
+  top: calc(44px + 6px);
+  left: 50%;
+  transform: translateX(-50%);
+  display: inline-flex;
+  align-items: center;
+  z-index: 31;
+}
+
+.lang-switch__item {
+  display: inline-flex;
+  align-items: center;
+}
+
+.lang-switch__btn {
+  background: none;
+  border: none;
+  padding: 4px 8px;
+  font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI',
+    Roboto, sans-serif;
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  color: rgba(26, 39, 66, 0.42);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: color 0.2s ease;
+}
+
+.lang-switch__btn:hover {
+  color: rgba(26, 39, 66, 0.7);
+}
+
+.lang-switch__btn.is-active {
+  color: #1a2742;
+}
+
+.lang-switch__divider {
+  width: 1px;
+  height: 11px;
+  background: rgba(26, 39, 66, 0.22);
+}
