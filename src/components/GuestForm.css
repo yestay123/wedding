@@ -1,0 +1,206 @@
+.form {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding: clamp(44px, 9vh, 96px) 24px clamp(60px, 12vh, 120px);
+  background: #e3e0d9;
+}
+
+.form__inner {
+  width: min(100%, 520px);
+}
+
+/* Title styled like the site's section headings, flanked by hairlines. */
+.form__title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(12px, 3.5vw, 22px);
+  margin: 0 0 clamp(24px, 5vh, 44px);
+  font-family: 'Libertinus Serif Display', Georgia, serif;
+  font-weight: 400;
+  font-size: clamp(24px, 7vw, 34px);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #5a5750;
+}
+
+.form__title::before,
+.form__title::after {
+  content: '';
+  flex: 0 0 auto;
+  width: clamp(22px, 9vw, 56px);
+  height: 1px;
+  background: #b6afa4;
+}
+
+.form__title-text {
+  white-space: nowrap;
+}
+
+.form__subtitle,
+.form__deadline {
+  margin: 0 0 clamp(10px, 2vh, 16px);
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(19px, 5vw, 24px);
+  line-height: 1.45;
+  text-align: center;
+  color: #6f675f;
+}
+
+.form__deadline {
+  margin-bottom: clamp(32px, 6vh, 52px);
+}
+
+.form__body {
+  display: flex;
+  flex-direction: column;
+}
+
+.form__label,
+.form__question {
+  margin: 0 0 16px;
+  font-family: 'Libertinus Serif Display', Georgia, serif;
+  font-size: clamp(19px, 5vw, 23px);
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  color: #4f4a44;
+}
+
+.form__question {
+  margin-top: clamp(34px, 6vh, 52px);
+}
+
+.form__input {
+  width: 100%;
+  padding: 8px 2px 12px;
+  border: none;
+  border-bottom: 1px solid #b6afa4;
+  background: transparent;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(19px, 5vw, 23px);
+  color: #4f4a44;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.form__input::placeholder {
+  color: #a89f95;
+}
+
+.form__input:focus {
+  border-bottom-color: #8c2a20;
+}
+
+/* ---- Radio options ---- */
+.form__options {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.form__option {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.form__radio-input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.form__radio {
+  flex: 0 0 auto;
+  width: 22px;
+  height: 22px;
+  border: 1.5px solid #a99a8c;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color 0.2s ease;
+}
+
+.form__radio::after {
+  content: '';
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: #8c2a20;
+  transform: scale(0);
+  transition: transform 0.18s ease;
+}
+
+.form__radio-input:checked + .form__radio {
+  border-color: #8c2a20;
+}
+
+.form__radio-input:checked + .form__radio::after {
+  transform: scale(1);
+}
+
+.form__radio-input:focus-visible + .form__radio {
+  box-shadow: 0 0 0 3px rgba(140, 42, 32, 0.22);
+}
+
+.form__option-text {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(18px, 4.8vw, 22px);
+  color: #5c534c;
+}
+
+/* ---- Submit ---- */
+.form__submit {
+  align-self: center;
+  margin-top: clamp(34px, 6vh, 52px);
+  padding: 15px 52px;
+  border: none;
+  border-radius: 0;
+  background: #8c2a20;
+  color: #f4e9e0;
+  font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI',
+    Roboto, sans-serif;
+  font-size: clamp(13px, 3.4vw, 15px);
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: background 0.2s ease, transform 0.12s ease;
+}
+
+.form__submit:hover {
+  background: #732015;
+}
+
+.form__submit:active {
+  transform: scale(0.98);
+}
+
+.form__submit:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+.form__error {
+  margin: clamp(20px, 4vh, 32px) 0 0;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(17px, 4.4vw, 20px);
+  text-align: center;
+  color: #b23a2c;
+}
+
+.form__thanks {
+  margin: clamp(24px, 6vh, 48px) 0;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(21px, 5.4vw, 27px);
+  text-align: center;
+  color: #4f4a44;
+}

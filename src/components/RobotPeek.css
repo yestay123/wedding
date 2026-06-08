@@ -1,0 +1,252 @@
+.peek {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(38vw, 150px);
+  /* Behind the topbar (z-30) so the body/crown tuck behind the bar and only
+     the lower part of the (inverted) head peeks below it. */
+  z-index: 29;
+  pointer-events: none;
+}
+
+/* Slide in/out from above the screen. */
+.peek__slide {
+  transform: translateY(-100%);
+  transition: transform 0.6s cubic-bezier(0.34, 1.36, 0.5, 1);
+  will-change: transform;
+}
+
+.peek--in .peek__slide {
+  /* Reveal roughly the lower half of the head (down past the eyes). */
+  transform: translateY(-38%);
+}
+
+/* Gentle hovering bob while peeking. */
+.peek__bob {
+  animation: peek-bob 3.8s ease-in-out infinite;
+  will-change: transform;
+}
+
+/* Hang upside-down. */
+.peek__invert {
+  position: relative;
+  transform: rotate(180deg);
+}
+
+.peek__img {
+  display: block;
+  width: 100%;
+  height: auto;
+  user-select: none;
+  -webkit-user-drag: none;
+  filter: drop-shadow(0 -8px 16px rgba(40, 12, 10, 0.28));
+}
+
+/* Pixel eyes on the robot's screen face (flips with the inverted wrapper). */
+.peek__face {
+  position: absolute;
+  top: 24%;
+  left: 51%;
+  width: 36%;
+  transform: translateX(-50%);
+  display: flex;
+  justify-content: center;
+  gap: 16%;
+}
+
+.peek-eye {
+  position: relative;
+  width: 38%;
+  aspect-ratio: 5 / 3;
+}
+
+.peek-eye__state {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  opacity: 0;
+}
+
+.peek-eye__open {
+  animation: peek-open 7.2s linear infinite;
+}
+.peek-eye__look-a {
+  animation: peek-look-a 7.2s linear infinite;
+}
+.peek-eye__look-b {
+  animation: peek-look-b 7.2s linear infinite;
+}
+.peek-eye__blink {
+  animation: peek-blink 7.2s linear infinite;
+}
+.peek-eye__happy {
+  animation: peek-happy 7.2s linear infinite;
+}
+
+.peek-eye__row {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0;
+}
+
+.peek-eye__cell {
+  aspect-ratio: 1;
+}
+
+.peek-eye__cell.is-on {
+  background: #ffffff;
+  box-shadow:
+    0 0 2px #ffffff,
+    0 0 6px rgba(255, 255, 255, 0.85),
+    0 0 12px rgba(180, 220, 255, 0.45);
+  image-rendering: pixelated;
+}
+
+/* One shared 7.2s timeline; exactly one expression shows at a time.
+   Windows: glance-A 18-25%, glance-B 32-39%, double-blink 49-58%,
+   happy squint 72-84%, open otherwise. */
+@keyframes peek-open {
+  0%,
+  17% {
+    opacity: 1;
+  }
+  19%,
+  24% {
+    opacity: 0;
+  }
+  26%,
+  31% {
+    opacity: 1;
+  }
+  33%,
+  38% {
+    opacity: 0;
+  }
+  40%,
+  48% {
+    opacity: 1;
+  }
+  49.5%,
+  51% {
+    opacity: 0;
+  }
+  52.5%,
+  54% {
+    opacity: 1;
+  }
+  55.5%,
+  57% {
+    opacity: 0;
+  }
+  58.5%,
+  71% {
+    opacity: 1;
+  }
+  73%,
+  83% {
+    opacity: 0;
+  }
+  85%,
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes peek-look-a {
+  0%,
+  17% {
+    opacity: 0;
+  }
+  19%,
+  24% {
+    opacity: 1;
+  }
+  26%,
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes peek-look-b {
+  0%,
+  31% {
+    opacity: 0;
+  }
+  33%,
+  38% {
+    opacity: 1;
+  }
+  40%,
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes peek-blink {
+  0%,
+  48% {
+    opacity: 0;
+  }
+  49.5%,
+  51% {
+    opacity: 1;
+  }
+  52.5%,
+  54% {
+    opacity: 0;
+  }
+  55.5%,
+  57% {
+    opacity: 1;
+  }
+  58.5%,
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes peek-happy {
+  0%,
+  71% {
+    opacity: 0;
+  }
+  73%,
+  83% {
+    opacity: 1;
+  }
+  85%,
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes peek-bob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(5px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .peek__slide {
+    transition: none;
+  }
+  .peek__bob,
+  .peek-eye__open,
+  .peek-eye__look-a,
+  .peek-eye__look-b,
+  .peek-eye__blink,
+  .peek-eye__happy {
+    animation: none;
+  }
+  /* Keep eyes open when motion is reduced. */
+  .peek-eye__open {
+    opacity: 1;
+  }
+}

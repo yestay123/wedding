@@ -15,7 +15,7 @@ export function Navbar({
     <header className={`navbar${dark ? ' navbar--dark' : ''}`}>
       <span className="navbar__name navbar__name--left">{leftName}</span>
       <span className="navbar__rings">
-        <img src="/rings.svg" alt="wedding rings" draggable={false} />
+        <img src="/rings.svg?v=2" alt="wedding rings" draggable={false} />
       </span>
       <span className="navbar__name navbar__name--right">{rightName}</span>
     </header>

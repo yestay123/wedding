@@ -1,31 +1,28 @@
-import { useLang } from '../i18n'
-import { RobotChampagne } from './RobotChampagne'
 import './Hero.css'
+import { Calendar } from './Calendar'
 
 export function Hero() {
-  const { t } = useLang()
-
   return (
     <section className="hero">
-      <figure className="hero__polaroid">
-        <img src="/polaroid.png" alt="Temirlan & Aruna" draggable={false} />
-      </figure>
+      <div className="hero__stage">
+        <img
+          className="hero__pattern"
+          src="/love-pattern.png"
+          alt=""
+          draggable={false}
+        />
 
-      <div className="hero__date">
-        <span className="hero__date-weekday">{t.ceremonyInvite}</span>
-        <span className="hero__date-rule" aria-hidden="true" />
-        <p className="hero__date-main">
-          {t.ceremonyDay} {t.ceremonyMonthYear}
-        </p>
-        <span className="hero__date-rule" aria-hidden="true" />
-        <span className="hero__date-time">
-          {t.ceremonyTimeLabel} {t.ceremonyTime}
-        </span>
+        <figure className="hero__polaroid">
+          <picture>
+            <source srcSet="/polaroid.webp" type="image/webp" />
+            <img src="/polaroid.jpg" alt="Temirlan & Aruna" draggable={false} />
+          </picture>
+        </figure>
       </div>
 
-      <RobotChampagne
-        message={<span className="rc__bubble-text">{t.robotJoke}</span>}
-      />
+      <div className="hero__calendar">
+        <Calendar />
+      </div>
     </section>
   )
 }

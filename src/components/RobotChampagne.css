@@ -17,7 +17,7 @@
   flex-direction: column;
   gap: 3px;
   width: max-content;
-  max-width: min(46vw, 188px);
+  max-width: min(64vw, 280px);
   padding: 0.7rem 1rem;
   background: #ffffff;
   color: #1a2742;

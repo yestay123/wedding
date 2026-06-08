@@ -26,12 +26,15 @@ type Phase = 'intro' | 'exiting'
 interface ChatMessage {
   id: number
   from: 'bot' | 'user'
-  text: string
+  // For bot messages, the index into the (live) welcomeLines so the text stays
+  // reactive to language switching. User messages render the current buttonLabel.
+  lineIndex?: number
 }
 
 interface IntroSequenceProps {
   src?: string
   buttonLabel?: string
+  tapHint?: string
   welcomeLines?: string[]
   onComplete?: () => void
 }
@@ -39,6 +42,7 @@ interface IntroSequenceProps {
 export function IntroSequence({
   src = '/wedding-robot-clean.mp4',
   buttonLabel = 'Полетели!',
+  tapHint = 'Нажмите сюда',
   welcomeLines = WELCOME_LINES,
   onComplete,
 }: IntroSequenceProps) {
@@ -108,7 +112,7 @@ export function IntroSequence({
     const timers: number[] = []
     let delay = 500
 
-    welcomeLines.forEach((line) => {
+    welcomeLines.forEach((_, i) => {
       timers.push(
         window.setTimeout(() => setTyping(true), delay),
       )
@@ -119,7 +123,7 @@ export function IntroSequence({
           idRef.current += 1
           setMessages((prev) => [
             ...prev,
-            { id: idRef.current, from: 'bot', text: line },
+            { id: idRef.current, from: 'bot', lineIndex: i },
           ])
         }, delay),
       )
@@ -143,7 +147,7 @@ export function IntroSequence({
     idRef.current += 1
     setMessages((prev) => [
       ...prev,
-      { id: idRef.current, from: 'user', text: buttonLabel },
+      { id: idRef.current, from: 'user' },
     ])
 
     window.setTimeout(() => {
@@ -183,11 +187,17 @@ export function IntroSequence({
         className={`intro__chat${exiting ? ' intro__chat--out' : ''}`}
         aria-live="polite"
       >
-        {messages.map((msg) => (
-          <div key={msg.id} className={`bubble-row bubble-row--${msg.from}`}>
-            <div className={`bubble bubble--${msg.from}`}>{msg.text}</div>
-          </div>
-        ))}
+        {messages.map((msg) => {
+          const text =
+            msg.from === 'bot'
+              ? welcomeLines[msg.lineIndex ?? 0] ?? ''
+              : buttonLabel
+          return (
+            <div key={msg.id} className={`bubble-row bubble-row--${msg.from}`}>
+              <div className={`bubble bubble--${msg.from}`}>{text}</div>
+            </div>
+          )
+        })}
 
         {typing && (
           <div className="bubble-row bubble-row--bot">
@@ -207,7 +217,7 @@ export function IntroSequence({
           onClick={handleEnter}
           disabled={!canEnter || exiting}
         >
-          <span className="intro__button-label">{buttonLabel}</span>
+          <span className="intro__button-label">{tapHint}</span>
         </button>
       </div>
     </div>

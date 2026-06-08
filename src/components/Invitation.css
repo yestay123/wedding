@@ -1,0 +1,213 @@
+.inv {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding: clamp(20px, 4vh, 44px) 22px clamp(48px, 9vh, 88px);
+}
+
+.inv__title {
+  margin: 0 0 clamp(20px, 4vh, 40px);
+  font-family: 'Libertinus Serif Display', Georgia, serif;
+  font-weight: 400;
+  font-size: 24px;
+  letter-spacing: -0.01em;
+  text-align: center;
+  color: #5a5750;
+}
+
+/* ---- Envelope (uploaded image) with the letter text laid on the paper ---- */
+
+.inv__env {
+  position: relative;
+  width: min(96vw, 640px);
+}
+
+.inv__env-img {
+  display: block;
+  width: 100%;
+  height: auto;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+/* ---- Red ticket band under the envelope ---- */
+
+.ticket {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding: clamp(32px, 7vh, 72px) 22px;
+  background-color: #8c2a20;
+  background-image: url('/ticket-background.jpg');
+  background-image: -webkit-image-set(
+    url('/ticket-background.webp') type('image/webp'),
+    url('/ticket-background.jpg') type('image/jpeg')
+  );
+  background-image: image-set(
+    url('/ticket-background.webp') type('image/webp'),
+    url('/ticket-background.jpg') type('image/jpeg')
+  );
+  background-size: cover;
+  background-position: center;
+}
+
+.ticket::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(40, 8, 6, 0.32);
+  pointer-events: none;
+}
+
+.ticket__inner {
+  position: relative;
+  z-index: 1;
+  container-type: inline-size;
+  width: min(82vw, 380px);
+  font-family: 'Libertinus Serif Display', Georgia, serif;
+  color: #4a443d;
+}
+
+.ticket__img {
+  display: block;
+  width: 100%;
+  height: auto;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+/* Content overlay sits on top of the ticket artwork. */
+.ticket__content {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Upper (bigger) part, above the perforation line (~75.5%). */
+.ticket__upper {
+  flex: 0 0 75.5%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3cqw;
+  padding: 6cqw 8cqw 4cqw;
+  text-align: center;
+}
+
+.ticket__title {
+  margin: 0;
+  font-size: 7.6cqw;
+  font-weight: 400;
+  line-height: 1.05;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: #8c2a20;
+}
+
+.ticket__photo {
+  width: 100%;
+  margin: 1cqw 0;
+  border-radius: 2cqw;
+  overflow: hidden;
+  box-shadow: 0 1.6cqw 3.6cqw rgba(40, 25, 20, 0.26);
+}
+
+.ticket__photo img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.ticket__hotel {
+  margin: 0;
+  font-size: 8cqw;
+  font-weight: 400;
+  line-height: 1.1;
+  color: #3d3833;
+}
+
+.ticket__hall {
+  margin: 0;
+  font-size: 5.6cqw;
+  font-style: italic;
+  color: #6a635b;
+}
+
+.ticket__addr {
+  margin: 0;
+  font-size: 5.2cqw;
+  color: #6a635b;
+}
+
+.ticket__map {
+  margin-top: 3cqw;
+  padding: 3.4cqw 9cqw;
+  border-radius: 0;
+  background: #8c2a20;
+  color: #f6efe6;
+  font-size: 5.4cqw;
+  text-transform: uppercase;
+  text-decoration: none;
+  letter-spacing: 0.06em;
+  transition: background 0.2s ease;
+}
+
+.ticket__map:hover {
+  background: #732015;
+}
+
+/* Lower (smaller) part, below the perforation line. */
+.ticket__lower {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2cqw;
+  padding: 0 6cqw;
+}
+
+.ticket__count-title {
+  font-size: 7.6cqw;
+  line-height: 1.05;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  text-align: center;
+  color: #8c2a20;
+}
+
+.ticket__count {
+  display: flex;
+  align-items: flex-start;
+  gap: 5cqw;
+}
+
+.ticket__count-unit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 13cqw;
+  gap: 0.6cqw;
+}
+
+.ticket__count-num {
+  font-size: 10cqw;
+  line-height: 1;
+  letter-spacing: -0.01em;
+  color: #8c2a20;
+  font-variant-numeric: tabular-nums;
+}
+
+.ticket__count-lbl {
+  font-size: 3.4cqw;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #8a837a;
+}
