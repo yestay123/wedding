@@ -1,8 +1,9 @@
 .navbar {
   position: fixed;
   top: 0;
-  left: 0;
-  right: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(100%, var(--frame-width));
   height: 44px;
   display: grid;
   grid-template-columns: 1fr auto 1fr;

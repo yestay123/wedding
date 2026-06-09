@@ -1,7 +1,16 @@
 .app {
   position: relative;
   width: 100%;
+  max-width: var(--frame-width);
+  margin-inline: auto;
   min-height: 100dvh;
   background: #e3e0d9;
   overflow-x: hidden;
+}
+
+/* Phone-frame look on larger screens. */
+@media (min-width: 480px) {
+  .app {
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.18), 0 24px 70px rgba(0, 0, 0, 0.5);
+  }
 }

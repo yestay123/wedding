@@ -1,3 +1,8 @@
+:root {
+  /* Phone-frame width the app is clamped to on larger screens. */
+  --frame-width: 440px;
+}
+
 *,
 *::before,
 *::after {
@@ -18,4 +23,12 @@ body {
   color: #111111;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
+}
+
+/* Beyond phone width, sit the app in a centered phone-style frame on a
+   neutral backdrop instead of stretching across the whole screen. */
+@media (min-width: 480px) {
+  body {
+    background: #201d1b;
+  }
 }
