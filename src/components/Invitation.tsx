@@ -7,6 +7,7 @@ import { Reveal } from './Reveal'
 const ENVELOPE_SRC: Record<string, string> = {
   ru: '/envelope-rus.webp',
   kk: '/envelope-kaz.webp',
+  en: '/envelope-eng.webp',
 }
 
 const WEDDING_DATE = new Date('2026-08-23T17:00:00')

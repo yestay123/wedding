@@ -4,6 +4,7 @@ import './LanguageSwitcher.css'
 const OPTIONS: { code: Lang; label: string }[] = [
   { code: 'ru', label: 'РУС' },
   { code: 'kk', label: 'ҚАЗ' },
+  { code: 'en', label: 'ENG' },
 ]
 
 export function LanguageSwitcher() {

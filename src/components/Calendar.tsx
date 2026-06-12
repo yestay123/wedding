@@ -5,6 +5,7 @@ import { Reveal } from './Reveal'
 const CALENDAR_SRC: Record<string, { webp: string; png: string }> = {
   ru: { webp: '/calendar-rus.webp', png: '/calendar-rus.png' },
   kk: { webp: '/calendar-kaz.webp', png: '/calendar-kaz.png' },
+  en: { webp: '/calendar-eng.webp', png: '/calendar-eng.png' },
 }
 
 export function Calendar() {

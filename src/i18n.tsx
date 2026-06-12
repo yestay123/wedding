@@ -8,7 +8,7 @@ import {
   type ReactNode,
 } from 'react'
 
-export type Lang = 'ru' | 'kk'
+export type Lang = 'ru' | 'kk' | 'en'
 
 export interface Translations {
   welcomeLines: string[]
@@ -131,6 +131,47 @@ const STRINGS: Record<Lang, Translations> = {
     ceremonyTime: '17:00',
     robotJoke: 'Google Meet шақыруын кейінірек жібереміз... әзіл.',
   },
+  en: {
+    welcomeLines: [
+      "Welcome to Temirlan and Aruna's wedding!",
+      "Come on in — I'll show you around.",
+    ],
+    enter: "Let's go!",
+    tapHint: 'Tap here',
+    inviteTitle: 'WE INVITE YOU',
+    inviteGreeting: 'Dear family and friends!',
+    inviteBody:
+      'With great joy we invite you to be our honored guests at the celebration dedicated to the wedding of',
+    inviteNames: 'Temirlan and Aruna',
+    weekdaysShort: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+    calMonth: 'August',
+    calWeekdays: ['friday', 'saturday', 'sunday'],
+    dateFull: 'August 23, 2026',
+    locTitle: 'Celebration venue',
+    locHotel: 'Hilton Hotel',
+    locHall: 'Grand Ballroom',
+    locAddress: 'Heydar Aliyev, 14',
+    openMap: 'Open map',
+    countdownTitle: 'Time left until the wedding',
+    countdownUnits: ['days', 'hrs', 'min', 'sec'],
+    formTitle: 'Guest form',
+    formSubtitle: 'Your response will help us prepare better for the celebration.',
+    formDeadline: 'Please confirm your attendance by 15.07.2026.',
+    formNameLabel: 'Enter your first and last name',
+    formNamePlaceholder: 'First and last name',
+    formAttendQuestion: 'Will you be able to attend the celebration?',
+    formOptions: ['I will come', 'Coming with a +1', "I can't make it"],
+    formSubmit: 'Submit',
+    formSubmitting: 'Sending…',
+    formError: 'Could not send. Please try again.',
+    formThanks: 'Thank you! Your response has been recorded.',
+    ceremonyInvite: 'We invite you',
+    ceremonyMonthYear: 'August 2026',
+    ceremonyDay: '23',
+    ceremonyTimeLabel: 'Start',
+    ceremonyTime: '17:00',
+    robotJoke: "We'll send the Google Meet invite later... Just kidding",
+  },
 }
 
 const STORAGE_KEY = 'wedding-lang'
@@ -138,7 +179,7 @@ const STORAGE_KEY = 'wedding-lang'
 function readInitialLang(): Lang {
   if (typeof localStorage !== 'undefined') {
     const saved = localStorage.getItem(STORAGE_KEY)
-    if (saved === 'ru' || saved === 'kk') return saved
+    if (saved === 'ru' || saved === 'kk' || saved === 'en') return saved
   }
   return 'ru'
 }
