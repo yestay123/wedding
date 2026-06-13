@@ -15,7 +15,12 @@ export function Calendar() {
   return (
     <Reveal as="figure" className="cal">
       <figcaption className="cal__date">
-        <span className="cal__date-text">{t.dateFull}</span>
+        <span className="cal__date-stack">
+          <span className="cal__date-text">{t.dateFull}</span>
+          <span className="cal__date-time">
+            {t.ceremonyTimeLabel} · {t.ceremonyTime}
+          </span>
+        </span>
       </figcaption>
 
       <picture>
