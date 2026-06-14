@@ -36,6 +36,8 @@ export interface Translations {
   formNamePlaceholder: string
   formAttendQuestion: string
   formOptions: string[]
+  formPlusOneLabel: string
+  formPlusOnePlaceholder: string
   formSubmit: string
   formSubmitting: string
   formError: string
@@ -78,7 +80,9 @@ const STRINGS: Record<Lang, Translations> = {
     formNameLabel: 'Введите Имя и Фамилию',
     formNamePlaceholder: 'Имя и Фамилия',
     formAttendQuestion: 'Сможете ли вы присутствовать на торжестве?',
-    formOptions: ['Я приду', 'Приду с парой +1', 'Прийти не получится'],
+    formOptions: ['Приду один/одна', 'Придем вдвоем', 'Не приду'],
+    formPlusOneLabel: 'Имя и Фамилия второго гостя',
+    formPlusOnePlaceholder: 'Имя и Фамилия гостя',
     formSubmit: 'Отправить',
     formSubmitting: 'Отправляем…',
     formError: 'Не удалось отправить. Попробуйте ещё раз.',
@@ -119,7 +123,9 @@ const STRINGS: Record<Lang, Translations> = {
     formNameLabel: 'Аты-жөніңізді жазыңыз',
     formNamePlaceholder: 'Аты-жөні',
     formAttendQuestion: 'Тойға қатыса аласыз ба?',
-    formOptions: ['Келемін', 'Жұбыммен келемін +1', 'Келе алмаймын'],
+    formOptions: ['Жалғыз келемін', 'Екеуміз келеміз', 'Келе алмаймын'],
+    formPlusOneLabel: 'Екінші қонақтың аты-жөні',
+    formPlusOnePlaceholder: 'Қонақтың аты-жөні',
     formSubmit: 'Жіберу',
     formSubmitting: 'Жіберілуде…',
     formError: 'Жіберу мүмкін болмады. Қайталап көріңіз.',
@@ -160,7 +166,9 @@ const STRINGS: Record<Lang, Translations> = {
     formNameLabel: 'Enter your first and last name',
     formNamePlaceholder: 'First and last name',
     formAttendQuestion: 'Will you be able to attend the celebration?',
-    formOptions: ['I will come', 'Coming with a +1', "I can't make it"],
+    formOptions: ['Coming alone', 'Coming with a guest', 'Not coming'],
+    formPlusOneLabel: "Your guest's first and last name",
+    formPlusOnePlaceholder: "Guest's first and last name",
     formSubmit: 'Submit',
     formSubmitting: 'Sending…',
     formError: 'Could not send. Please try again.',

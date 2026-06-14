@@ -156,6 +156,31 @@
   color: #5c534c;
 }
 
+/* ---- Conditional +1 guest field ---- */
+.form__plus-one {
+  display: flex;
+  flex-direction: column;
+  margin-top: clamp(22px, 4.5vh, 36px);
+  animation: form-plus-one-in 0.34s ease;
+}
+
+@keyframes form-plus-one-in {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .form__plus-one {
+    animation: none;
+  }
+}
+
 /* ---- Submit ---- */
 .form__submit {
   align-self: center;

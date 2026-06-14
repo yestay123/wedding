@@ -11,12 +11,18 @@ type Status = 'idle' | 'submitting' | 'success' | 'error'
 export function GuestForm() {
   const { lang, t } = useLang()
   const [name, setName] = useState('')
+  const [plusOneName, setPlusOneName] = useState('')
   const [choice, setChoice] = useState(0)
   const [status, setStatus] = useState<Status>('idle')
+
+  const isPlusOne = choice === 1
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     if (status === 'submitting') return
+
+    const trimmedName = name.trim()
+    const trimmedPlusOne = plusOneName.trim()
 
     setStatus('submitting')
     try {
@@ -25,7 +31,8 @@ export function GuestForm() {
         // text/plain avoids a CORS preflight so Apps Script still records the row.
         headers: { 'Content-Type': 'text/plain;charset=utf-8' },
         body: JSON.stringify({
-          name: name.trim(),
+          name: trimmedName,
+          plusOneName: isPlusOne ? trimmedPlusOne : '',
           attendance: ATTENDANCE_CODES[choice],
           lang,
         }),
@@ -83,6 +90,24 @@ export function GuestForm() {
                   </label>
                 ))}
               </div>
+
+              {isPlusOne && (
+                <div className="form__plus-one">
+                  <label className="form__label" htmlFor="plus-one-name">
+                    {t.formPlusOneLabel}
+                  </label>
+                  <input
+                    id="plus-one-name"
+                    className="form__input"
+                    type="text"
+                    value={plusOneName}
+                    onChange={(e) => setPlusOneName(e.target.value)}
+                    placeholder={t.formPlusOnePlaceholder}
+                    autoComplete="name"
+                    required
+                  />
+                </div>
+              )}
 
               {status === 'error' && (
                 <p className="form__error" role="alert">
