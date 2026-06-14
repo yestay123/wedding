@@ -50,6 +50,59 @@
   user-select: none;
 }
 
+/* ---- Tap-to-start gate (shown only when autoplay is blocked) ---- */
+.intro__start {
+  position: absolute;
+  inset: 0;
+  z-index: 6;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(18px, 4.5vh, 30px);
+  border: none;
+  background: #e3e0d9;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  animation: intro-start-in 0.3s ease;
+}
+
+.intro__start-ring {
+  width: clamp(58px, 16vw, 86px);
+  height: clamp(58px, 16vw, 86px);
+  border: 2px solid #941914;
+  border-radius: 50%;
+  animation: intro-start-pulse 1.7s ease-in-out infinite;
+}
+
+.intro__start-text {
+  font-family: 'Libertinus Serif Display', Georgia, serif;
+  font-size: clamp(18px, 5.5vw, 26px);
+  letter-spacing: 0.04em;
+  color: #941914;
+}
+
+@keyframes intro-start-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes intro-start-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.9;
+  }
+  50% {
+    transform: scale(1.12);
+    opacity: 0.45;
+  }
+}
+
 /* ---- Chat ---- */
 
 .intro__chat {
@@ -246,6 +299,10 @@
   }
 
   .intro__button {
+    animation: none;
+  }
+
+  .intro__start-ring {
     animation: none;
   }
 

@@ -57,10 +57,16 @@ export function IntroSequence({
   const [messages, setMessages] = useState<ChatMessage[]>([])
   const [typing, setTyping] = useState(false)
   const [canEnter, setCanEnter] = useState(false)
+  const [needsTap, setNeedsTap] = useState(false)
 
   useEffect(() => {
     const video = videoRef.current
     if (!video) return
+
+    // React doesn't reliably set the muted *property* (only the attribute), and
+    // iOS only autoplays inline video when it is actually muted. Force it here.
+    video.muted = true
+    video.defaultMuted = true
 
     let raf = 0
     let finished = false
@@ -88,9 +94,11 @@ export function IntroSequence({
     }
 
     const start = () => {
-      void video.play().catch(() => {
-        // Autoplay can be blocked; the robot will start on first interaction.
-      })
+      video.muted = true
+      const p = video.play()
+      if (p && typeof p.then === 'function') {
+        p.then(() => setNeedsTap(false)).catch(() => setNeedsTap(true))
+      }
     }
 
     if (video.readyState >= 2) start()
@@ -98,11 +106,28 @@ export function IntroSequence({
 
     raf = requestAnimationFrame(tick)
 
+    // If autoplay never kicks in (e.g. iOS Low Power Mode), surface the tap gate.
+    const guard = window.setTimeout(() => {
+      const v = videoRef.current
+      if (v && v.paused) setNeedsTap(true)
+    }, 800)
+
     return () => {
       cancelAnimationFrame(raf)
+      window.clearTimeout(guard)
       video.removeEventListener('loadeddata', start)
     }
   }, [onComplete])
+
+  const handleStart = useCallback(() => {
+    const video = videoRef.current
+    if (!video) return
+    video.muted = true
+    void video
+      .play()
+      .then(() => setNeedsTap(false))
+      .catch(() => {})
+  }, [])
 
   // Drive the robot's incoming messages once it has settled into the float loop.
   useEffect(() => {
@@ -181,7 +206,20 @@ export function IntroSequence({
         playsInline
         autoPlay
         preload="auto"
+        disablePictureInPicture
       />
+
+      {needsTap && !exiting && !faded && (
+        <button
+          type="button"
+          className="intro__start"
+          onClick={handleStart}
+          aria-label={tapHint}
+        >
+          <span className="intro__start-ring" aria-hidden="true" />
+          <span className="intro__start-text">{tapHint}</span>
+        </button>
+      )}
 
       <div
         className={`intro__chat${exiting ? ' intro__chat--out' : ''}`}
