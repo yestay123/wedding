@@ -37,6 +37,12 @@
   white-space: nowrap;
 }
 
+/* Spacing comes from margin (not a whitespace text node) so the date stays
+   split across elements and dodges the browser's auto date detection. */
+.cal__date-word:not(:last-child) {
+  margin-right: 0.28em;
+}
+
 .cal__date-time {
   font-size: clamp(11px, 3.4vw, 15px);
   font-weight: 400;

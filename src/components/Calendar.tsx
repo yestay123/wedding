@@ -16,7 +16,16 @@ export function Calendar() {
     <Reveal as="figure" className="cal">
       <figcaption className="cal__date">
         <span className="cal__date-stack">
-          <span className="cal__date-text">{t.dateFull}</span>
+          {/* Split into per-word spans with no whitespace between them so
+              Android Chrome's text classifier can't detect a date pattern and
+              annotate it (which misparsed the Russian month as September). */}
+          <span className="cal__date-text">
+            {t.dateFull.split(' ').map((word, i) => (
+              <span className="cal__date-word" key={i}>
+                {word}
+              </span>
+            ))}
+          </span>
           <span className="cal__date-time">
             {t.ceremonyTimeLabel} · {t.ceremonyTime}
           </span>
